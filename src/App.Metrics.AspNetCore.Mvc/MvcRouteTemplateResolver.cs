@@ -71,7 +71,10 @@ namespace Microsoft.AspNetCore.Mvc.Internal
 
             if (actionDescriptor.Properties != null && actionDescriptor.Properties.ContainsKey(MsVersionpolicyIsAppliedToken))
             {
-                routeTemplate = routeTemplate.Replace(ApiVersionToken, routeData.Values[VersionRouteDataToken].ToString());
+                if (routeTemplate.Contains(ApiVersionToken))
+                {
+                    routeTemplate = routeTemplate.Replace(ApiVersionToken, routeData.Values[VersionRouteDataToken].ToString());
+                }
             }
 
             return routeTemplate;
